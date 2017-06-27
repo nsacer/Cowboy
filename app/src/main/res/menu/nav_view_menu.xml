@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group_one"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_box"
+            android:icon="@mipmap/ic_work_black_48dp"
+            android:title="@string/person_treasure" />
+        <item
+            android:id="@+id/nav_live"
+            android:icon="@mipmap/ic_group_work_black_48dp"
+            android:title="@string/person_live" />
+        <item
+            android:id="@+id/nav_ask"
+            android:icon="@mipmap/ic_assessment_black_48dp"
+            android:title="@string/person_ask" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@mipmap/ic_notifications_active_black_48dp"
+            android:title="@string/person_notification" />
+    </group>
+
+    <group
+        android:id="@+id/group_two"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@mipmap/ic_help_black_48dp"
+            android:title="@string/person_help" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@mipmap/ic_announcement_black_48dp"
+            android:title="@string/person_feedback" />
+        <item
+            android:id="@+id/nav_darkMode"
+            android:icon="@mipmap/ic_settings_brightness_black_48dp"
+            android:title="@string/person_night" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@mipmap/ic_settings_black_48dp"
+            android:title="@string/person_setting"/>
+    </group>
+
+</menu>

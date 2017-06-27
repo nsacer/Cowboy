@@ -1,0 +1,96 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="dp_00">0dp</dimen>
+    <dimen name="dp_0.06">0.06dp</dimen>
+    <dimen name="dp_0.08">0.08dp</dimen>
+    <dimen name="dp_0.16">0.16dp</dimen>
+    <dimen name="dp_0.2">0.2dp</dimen>
+    <dimen name="dp_0.4">0.4dp</dimen>
+    <dimen name="dp_0.6">0.6dp</dimen>
+    <dimen name="dp_0.8">0.8dp</dimen>
+    <dimen name="dp_01">1dp</dimen>
+    <dimen name="dp_02">2dp</dimen>
+    <dimen name="dp_04">4dp</dimen>
+    <dimen name="dp_06">6dp</dimen>
+    <dimen name="dp_08">8dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_28">28dp</dimen>
+    <dimen name="dp_32">32dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_48">48dp</dimen>
+    <dimen name="dp_56">56dp</dimen>
+    <dimen name="dp_72">72dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_120">120dp</dimen>
+    <dimen name="dp_max">1000dp</dimen>
+
+
+    <dimen name="sp_02">2sp</dimen>
+    <dimen name="sp_04">4sp</dimen>
+    <dimen name="sp_06">6sp</dimen>
+    <dimen name="sp_08">8sp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
+    <dimen name="sp_22">22sp</dimen>
+    <dimen name="sp_24">24sp</dimen>
+    <dimen name="sp_32">32sp</dimen>
+    <dimen name="sp_40">40sp</dimen>
+    <dimen name="sp_48">48sp</dimen>
+    <dimen name="sp_56">56sp</dimen>
+    <dimen name="sp_72">72sp</dimen>
+    <dimen name="sp_80">80sp</dimen>
+    <dimen name="sp_120">120sp</dimen>
+
+    <!-- 首页item分类标题的字体大小 -->
+    <dimen name="sp_tab_one_column_title">14sp</dimen>
+    <dimen name="sp_tab_one_article_author">12sp</dimen>
+    <dimen name="sp_tab_one_article_read">12sp</dimen>
+    <dimen name="sp_tab_one_article_title">16sp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- 内容输入框的高度 -->
+    <dimen name="text_input_et_height">56dp</dimen>
+    <dimen name="text_input_drawable_padding">8dp</dimen>
+
+    <!-- 页面左上角单独的返回按钮宽、高 -->
+    <dimen name="back_icon">56dp</dimen>
+    <dimen name="back_icon_padding">16dp</dimen>
+
+    <!-- RecyclerView的footer -->
+    <dimen name="footer_view_height">40dp</dimen>
+
+    <!-- 登录/注册 切换的文本信息marginBottom -->
+    <dimen name="login_switch_margin_bottom">48dp</dimen>
+    <dimen name="login_switch_text_size">16sp</dimen>
+    <dimen name="login_btn_height">40dp</dimen>
+    <dimen name="login_btn_width">120dp</dimen>
+
+    <!-- 自定义横向的ProgressBar加载条的高度 -->
+    <dimen name="progress_bar_height">4dp</dimen>
+
+    <dimen name="view_pager_header_height">120dp</dimen>
+    <dimen name="view_pager_header_margin_top">16dp</dimen>
+    <dimen name="view_pager_header_margin_btm">8dp</dimen>
+    <dimen name="view_pager_header_margin_lef_rig">32dp</dimen>
+    <dimen name="view_pager_header_page_margin">8dp</dimen>
+
+    <!-- tab stock -->
+    <dimen name="stock_title_height">40dp</dimen>
+    <dimen name="stock_title_draw_padding">4dp</dimen>
+
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="224dp"
+    android:background="@mipmap/wall"
+    android:paddingTop="@dimen/dp_32"
+    android:paddingBottom="@dimen/dp_08"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <customview.CircleImageView
+        android:id="@+id/civ_header"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        app:border_color="@color/colorWhite"
+        app:border_width="2dp"
+        app:border_overlay="false"
+        android:src="@mipmap/header"/>
+
+    <TextView
+        android:id="@+id/tv_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_08"
+        android:text="@string/person_nick"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/colorWhite"/>
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_08"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="@dimen/dp_00"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@mipmap/ic_attach_money_white_24dp"
+            android:drawablePadding="@dimen/dp_04"
+            android:gravity="center"
+            android:button="@null"
+            android:text="@string/app_number_default"/>
+
+        <RadioButton
+            android:layout_width="@dimen/dp_00"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@mipmap/ic_card_giftcard_white_24dp"
+            android:drawablePadding="@dimen/dp_04"
+            android:gravity="center"
+            android:button="@null"
+            android:text="@string/app_number_default"/>
+
+        <RadioButton
+            android:layout_width="@dimen/dp_00"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@mipmap/ic_donut_small_white_24dp"
+            android:drawablePadding="@dimen/dp_04"
+            android:gravity="center"
+            android:button="@null"
+            android:text="@string/app_number_default"/>
+
+    </RadioGroup>
+</LinearLayout>

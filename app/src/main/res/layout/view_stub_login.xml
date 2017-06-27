@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/acet_login_username"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_input_et_height"
+            android:hint="@string/username"
+            android:maxLines="1"
+            android:lines="1"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/acet_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_input_et_height"
+            android:paddingStart="@dimen/dp_00"
+            android:paddingLeft="@dimen/dp_00"
+            android:paddingEnd="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:drawableEnd="@mipmap/ic_visibility_black_24dp"
+            android:drawableRight="@mipmap/ic_visibility_black_24dp"
+            android:drawablePadding="@dimen/text_input_drawable_padding"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:lines="1"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/dp_16"
+        android:layout_width="@dimen/login_btn_width"
+        android:layout_height="@dimen/login_btn_height"
+        android:background="@color/loginBtnColor"
+        android:gravity="center"
+        android:text="@string/login_login"
+        android:textColor="@color/loginBtnTextColor"/>
+
+</LinearLayout>

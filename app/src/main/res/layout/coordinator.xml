@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.01dp"-->
+        <!--android:background="@color/divider_color"/>-->
+
+    <!--
+        app:cardBackgroundColor="?attr/windowBackground" -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_tab_bar"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="?attr/windowBackground"
+        app:cardUseCompatPadding="true">
+
+        <RadioGroup
+            android:id="@+id/rg_tab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:checkedButton="@+id/trb_index"
+            android:paddingTop="@dimen/dp_04"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/trb_index"
+                android:layout_width="@dimen/dp_00"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/TabRadioButton"
+                android:drawableTop="@drawable/selector_tab_index"
+                android:text="@string/tab_index"/>
+
+            <RadioButton
+                android:id="@+id/trb_stock"
+                android:layout_width="@dimen/dp_00"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/TabRadioButton"
+                android:drawableTop="@drawable/selector_tab_stock"
+                android:text="@string/tab_stock"/>
+
+            <RadioButton
+                android:id="@+id/trb_live"
+                android:layout_width="@dimen/dp_00"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/TabRadioButton"
+                android:drawableTop="@drawable/selector_tab_live"
+                android:text="@string/tab_live"/>
+
+            <RadioButton
+                android:id="@+id/trb_treasure"
+                android:layout_width="@dimen/dp_00"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/TabRadioButton"
+                android:drawableTop="@drawable/selector_tab_treasure"
+                android:text="@string/tab_treasure"/>
+
+            <RadioButton
+                android:id="@+id/trb_find"
+                android:layout_width="@dimen/dp_00"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/TabRadioButton"
+                android:drawableTop="@drawable/selector_tab_find"
+                android:text="@string/tab_find"/>
+        </RadioGroup>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

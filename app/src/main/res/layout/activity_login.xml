@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.live9666.cowboy.LoginActivity">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/back_icon"
+        android:layout_height="@dimen/back_icon"
+        android:contentDescription="@null"
+        android:padding="@dimen/back_icon_padding"
+        android:src="@mipmap/ic_arrow_back_black_24dp"
+        android:tint="@color/colorBackIcon" />
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="108dp"
+        android:layout_height="49.5dp"
+        android:layout_marginTop="@dimen/dp_32"
+        android:layout_below="@+id/iv_back"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@null"
+        android:src="@mipmap/register_logo"
+        android:tint="@color/colorBackIcon" />
+
+    <ViewSwitcher
+        android:id="@+id/vs_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_logo"
+        android:inAnimation="@anim/alpha_0_1"
+        android:outAnimation="@anim/alpha_1_0">
+
+        <include layout="@layout/view_stub_login" />
+
+        <include layout="@layout/view_stub_register" />
+
+    </ViewSwitcher>
+
+    <TextView
+        android:id="@+id/tv_switch_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_16"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/login_switch_margin_bottom"
+        android:text="@string/login_register"
+        android:textSize="@dimen/login_switch_text_size" />
+
+</RelativeLayout>
