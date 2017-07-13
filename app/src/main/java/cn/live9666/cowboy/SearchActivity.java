@@ -1,5 +1,6 @@
 package cn.live9666.cowboy;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +15,7 @@ import android.view.View;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import adapter.RvAdapterSearch;
@@ -38,7 +40,15 @@ public class SearchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        initView();
+    }
+
+    private void initView() {
+
         initToolbar();
+
+        SearchView searchView = (SearchView) findViewById(R.id.search_view);
+        initSearchView(searchView);
 
         initRecyclerView();
     }
@@ -57,7 +67,11 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
-        SearchView searchView = (SearchView) findViewById(R.id.search_view);
+    }
+
+    private void initSearchView(SearchView searchView) {
+
+        transparentSearchViewUnderline(searchView);
         searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
         //设置展开后图标的样式,这里只有两种,一种图标在搜索框外,一种在搜索框内
         searchView.setIconifiedByDefault(false);
@@ -154,6 +168,24 @@ public class SearchActivity extends BaseActivity {
 
         ArrayList<Stock> stocks = response.getStockList();
         adapter.setStocks(stocks);
+    }
+
+    private void transparentSearchViewUnderline(SearchView searchView) {
+
+        if (searchView != null) {
+            try {        //--拿到字节码
+                Class<?> argClass = searchView.getClass();
+                //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
+                Field ownField = argClass.getDeclaredField("mSearchPlate");
+                //--暴力反射,只有暴力反射才能拿到私有属性
+                ownField.setAccessible(true);
+                View mView = (View) ownField.get(searchView);
+                //--设置背景
+                mView.setBackgroundColor(Color.TRANSPARENT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
