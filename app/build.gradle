@@ -32,7 +32,7 @@ repositories {
 }
 
 ext{
-    supportVersion = "25.3.1"
+    supportVersion = "25.4.0"
 }
 
 dependencies {

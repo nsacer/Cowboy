@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -25,13 +24,12 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import adapter.RvAdapterStock;
 import asynctask.StocksInfoAsyncTask;
-import cn.live9666.cowboy.BaseActivity;
 import cn.live9666.cowboy.R;
 import cn.live9666.cowboy.SearchActivity;
 import listener.SimpleItemTouchHelperCallback;
@@ -50,8 +48,6 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
     private static final String TAG_DOWN = "tag_down";
     private static final String TAG_UP = "tag_up";
 
-    private BaseActivity activity;
-
     @ViewInject(R.id.toolbar_stock)
     private Toolbar toolbar;
 
@@ -64,18 +60,16 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
     @ViewInject(R.id.tv_stock_applies)
     private TextView tvStockApplies;
 
-    @ViewInject(R.id.srl_personal_stock)
-    private SwipeRefreshLayout swipeRefreshLayout;
-
     @ViewInject(R.id.recycler_tab_stock)
     private RecyclerView recyclerView;
 
     @ViewInject(R.id.tv_no_stocks)
     private TextView tvNoStocks;
 
-    private RvAdapterStock adapter;
+    //股票数据轮询
+    private ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
-    private ScheduledExecutorService executorService;
+    private RvAdapterStock adapter;
 
     private Handler handler = new Handler() {
 
@@ -91,8 +85,6 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        activity = (BaseActivity) getActivity();
-
         initView();
 
     }
@@ -100,15 +92,47 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
     @Override
     public void onResume() {
         super.onResume();
-
         getConcernedStocks();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shutdownExecutorService();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        shutdownExecutorService();
+    }
+
+    //开启轮询股票数据
+    private void startExecutorService(final String stocks) {
+
+        if (TextUtils.isEmpty(stocks)) return;
+        if (executorService.isShutdown()) {
+            executorService = Executors.newSingleThreadScheduledExecutor();
+        }
+        executorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+
+                requestStocksInfo(stocks);
+            }
+        }, 0, 3000, TimeUnit.MILLISECONDS);
+    }
+
+    //关闭ExecutorService
+    private void shutdownExecutorService() {
+        if (!executorService.isShutdown()) {
+            executorService.shutdownNow();
+        }
     }
 
     private void initView() {
 
         initToolbar(toolbar);
-
-        initRefreshLayout();
 
         initTabLayout();
 
@@ -120,19 +144,6 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
         toolbar.setTitle(getResources().getString(R.string.tab_stock));
         toolbar.inflateMenu(R.menu.tab_stock);
         toolbar.setOnMenuItemClickListener(this);
-    }
-
-    private void initRefreshLayout() {
-
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                getConcernedStocks();
-            }
-        });
-        swipeRefreshLayout.setRefreshing(true);
     }
 
     private void initTabLayout() {
@@ -147,12 +158,9 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
                 switch (tab.getPosition()) {
 
                     case 1:
-
                         setDrawableAndTag(tvStockPrice);
                         break;
-
                     case 2:
-
                         setDrawableAndTag(tvStockApplies);
                         break;
                 }
@@ -169,12 +177,9 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
                 switch (tab.getPosition()) {
 
                     case 1:
-
                         setDrawableAndTag(tvStockPrice);
                         break;
-
                     case 2:
-
                         setDrawableAndTag(tvStockApplies);
                         break;
                 }
@@ -201,13 +206,9 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
         switch (item.getItemId()) {
 
             case R.id.action_refresh:
-
-                swipeRefreshLayout.setRefreshing(true);
                 getConcernedStocks();
                 break;
-
             case R.id.action_search:
-
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
         }
@@ -244,13 +245,10 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
 
     ////////******网络请求******////////
 
-    /**
-     * 请求行情数据
-     */
+    //请求行情数据
     private void requestStocksInfo(String stocks) {
 
-        StocksInfoAsyncTask asyncTask = new StocksInfoAsyncTask(handler, stocks);
-        asyncTask.execute();
+        new StocksInfoAsyncTask(handler, stocks).execute();
     }
 
 
@@ -269,7 +267,6 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
 
                 case CowboyHandlerKey.STOCKS_INFO:
 
-                    swipeRefreshLayout.setRefreshing(false);
                     StocksInfoResponse response = bundle.getParcelable(CowboyResponseDocument.STOCKS_INFO);
                     dealWithStocksInfoResponse(response, desc);
                     break;
@@ -288,7 +285,7 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
             return;
         }
 
-        ScheduledExecutorServiceForStock(response.getAllowed());
+        if (!"1".equals(response.getAllowed())) shutdownExecutorService();
 
         ArrayList<Stock> stocks = response.getInfos();
         if (stocks != null && !stocks.isEmpty())
@@ -307,42 +304,10 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
         if (TextUtils.isEmpty(stocks)) {
 
             tvNoStocks.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setRefreshing(false);
         } else {
 
             tvNoStocks.setVisibility(View.INVISIBLE);
-            requestStocksInfo(stocks);
-        }
-
-    }
-
-    /**
-     * 定时刷新数据
-     */
-    private void ScheduledExecutorServiceForStock(String allowed) {
-
-        if (TextUtils.isEmpty(allowed))
-            return;
-
-        if (allowed.equals("1")) {
-
-            if (executorService == null) {
-
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-
-                        getConcernedStocks();
-                    }
-                };
-                executorService = new ScheduledThreadPoolExecutor(1);
-                executorService.scheduleAtFixedRate(runnable, 5000, 5000, TimeUnit.MILLISECONDS);
-            }
-
-        } else {
-
-            if (executorService != null)
-                executorService.shutdownNow();
+            startExecutorService(stocks);
         }
 
     }

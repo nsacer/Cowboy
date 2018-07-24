@@ -32,7 +32,7 @@
             android:name=".TextInputActivity"
             android:label="@string/title_activity_text_input" />
         <activity android:name=".WebViewActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity"/>
     </application>
 
 </manifest>

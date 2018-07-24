@@ -28,6 +28,7 @@ import utils.SharedPreferencesUtil;
 
 /**
  * Created by zpf on 2017/4/21.
+ * 股票搜索结果的adapter
  */
 
 public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.SearchHolder> implements View.OnClickListener{
@@ -121,6 +122,7 @@ public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.Search
         } else {
 
             holder.ib.setTag(R.id.ib_add_search_stock, false);
+            doRotationAnimCM90(holder.ib);
         }
     }
 

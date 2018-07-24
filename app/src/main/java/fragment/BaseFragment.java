@@ -12,11 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.xutils.x;
-
-import cn.live9666.cowboy.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +22,7 @@ public class BaseFragment extends Fragment {
 
     private boolean injected = false;
     protected Context context;
-    private Activity activity;
+    protected Activity activity;
     protected AppCompatActivity appCompatActivity;
 
     public BaseFragment() {
