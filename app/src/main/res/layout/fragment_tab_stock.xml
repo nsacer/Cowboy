@@ -52,6 +52,7 @@
             android:id="@+id/recycler_tab_stock"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="vertical"
             android:layout_marginTop="@dimen/dp_04" />
 
         <TextView
