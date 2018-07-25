@@ -70,6 +70,7 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
     private ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
     private RvAdapterStock adapter;
+    private SimpleItemTouchHelperCallback simpleCallback;
 
     private Handler handler = new Handler() {
 
@@ -195,8 +196,8 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
         adapter = new RvAdapterStock(activity);
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter, true, true);
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        simpleCallback = new SimpleItemTouchHelperCallback(adapter, false, true);
+        ItemTouchHelper helper = new ItemTouchHelper(simpleCallback);
         helper.attachToRecyclerView(recyclerView);
     }
 
@@ -205,8 +206,8 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
 
         switch (item.getItemId()) {
 
-            case R.id.action_refresh:
-                getConcernedStocks();
+            case R.id.action_edit:
+                showToast("编辑");
                 break;
             case R.id.action_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
@@ -285,7 +286,10 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
             return;
         }
 
-        if (!"1".equals(response.getAllowed())) shutdownExecutorService();
+        if (!"1".equals(response.getAllowed())) {
+            shutdownExecutorService();
+            simpleCallback.setLongPressEnable(true);
+        } else simpleCallback.setLongPressEnable(false);
 
         ArrayList<Stock> stocks = response.getInfos();
         if (stocks != null && !stocks.isEmpty())

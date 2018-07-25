@@ -22,7 +22,7 @@ public class CowboyApplication extends Application {
         super.onCreate();
 
         mContext = getApplicationContext();
-
+        CowboySetting.CLIENT_VERSION = MobileUtils.getVersion(this);
     }
 
     @Override

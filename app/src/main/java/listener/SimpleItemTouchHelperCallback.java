@@ -111,4 +111,14 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
         return isSwipeEnable;
     }
 
+    public void setLongPressEnable(boolean enableLongPress) {
+
+        this.isLongPressEnable = enableLongPress;
+    }
+
+    public void setItemViewSwipeEnable(boolean enableSwipe) {
+
+        this.isSwipeEnable = enableSwipe;
+    }
+
 }

@@ -2,7 +2,6 @@ package cn.live9666.cowboy;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -10,10 +9,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
+import utils.CowboySetting;
 
 @ContentView(R.layout.activity_web_view)
 public class WebViewActivity extends BaseActivity {
@@ -37,7 +37,6 @@ public class WebViewActivity extends BaseActivity {
         initView();
 
         String url = getIntent().getStringExtra(WEB_URL);
-//        webView.loadUrl(getIntent().getStringExtra(WEB_URL));
         webView.loadUrl(url);
     }
 
@@ -53,6 +52,7 @@ public class WebViewActivity extends BaseActivity {
 
         WebSettings settings = webView.getSettings();
         settings.setLoadWithOverviewMode(true);
+        settings.setUserAgentString(settings.getUserAgentString() + " cowboy-app-android Version/" + CowboySetting.CLIENT_VERSION);
         settings.setJavaScriptEnabled(true);
         settings.setAllowUniversalAccessFromFileURLs(true);
         settings.setAllowFileAccessFromFileURLs(true);
@@ -78,7 +78,7 @@ public class WebViewActivity extends BaseActivity {
             }
         });
 
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
 
             @Override
             public void onProgressChanged(WebView view, int newProgress) {

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.xutils.x;
 
@@ -78,5 +79,10 @@ public class BaseFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(false);
 
         return toolbar;
+    }
+
+    protected void showToast(String info) {
+
+        Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
     }
 }
