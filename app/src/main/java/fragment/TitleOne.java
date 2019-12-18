@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import adapter.AdViewPagerAdapter;
 import adapter.RvAdapterTitlePage;
 import asynctask.GetTabResourceAsyncTask;
@@ -45,11 +47,11 @@ public class TitleOne extends Fragment {
     private Context mContext;
     private View root;
     private static final String[] IMAGES = new String[]{
-            "http://isujin.com/wp-content/uploads/2017/02/wallhaven-314162-300x188.jpg",
-            "http://isujin.com/wp-content/uploads/2017/02/wallhaven-164067-300x169.jpg",
-            "http://isujin.com/wp-content/uploads/2017/02/wallhaven-314162-300x188.jpg",
-            "http://isujin.com/wp-content/uploads/2017/02/wallhaven-164067-300x169.jpg",
-            "http://isujin.com/wp-content/uploads/2017/02/wallhaven-314162-300x188.jpg"};
+            "https://imgsa.baidu.com/news/q%3D100/sign=aa8dc3dac6177f3e1634f80d40ce3bb9/d043ad4bd11373f0f9473ef3ab0f4bfbfbed0465.jpg",
+            "https://imgsa.baidu.com/news/q%3D100/sign=9d16318cf803918fd1d139ca613d264b/3b87e950352ac65cee09001ff4f2b21193138a4a.jpg",
+            "https://imgsa.baidu.com/news/q%3D100/sign=49273e7e404a20a4371e38c7a0529847/0dd7912397dda144a7050adebdb7d0a20cf48649.jpg",
+            "https://imgsa.baidu.com/news/q%3D100/sign=5fbfea5d4590f60302b098470913b370/3c6d55fbb2fb4316b81f1c162fa4462309f7d35e.jpg"};
+    private ArrayList<AdModel> adModels = new ArrayList<>();
 
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
@@ -84,6 +86,13 @@ public class TitleOne extends Fragment {
         mContext = getContext();
 
         requestTitlePageDate(tabId, CowboyResponseDocument.DOWNLOAD, lastResourceId);
+
+        //创建几个admodel
+        for (String image : IMAGES) {
+            AdModel model = new AdModel();
+            model.setImg(image);
+            adModels.add(model);
+        }
     }
 
     @Override
@@ -219,11 +228,12 @@ public class TitleOne extends Fragment {
             lastResourceId = response.getLastResourceId();
 
         //TODO 是否显示HeaderView
-        boolean showHeaderView = SHOW.equals(response.getIsAdShow());
-
+//        boolean showHeaderView = SHOW.equals(response.getIsAdShow());
+        boolean showHeaderView = true;
         if (showHeaderView) {
 
-            adapterAdHeader.setArrayList(response.getAdList());
+//            adapterAdHeader.setArrayList(response.getAdList());
+            adapterAdHeader.setArrayList(adModels);
         }
 
         ((RvAdapterTitlePage) recyclerView.getAdapter())
