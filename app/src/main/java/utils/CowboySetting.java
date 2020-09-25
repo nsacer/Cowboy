@@ -5,6 +5,8 @@ package utils;
  */
 public class CowboySetting {
 
+    //https://www.9666.mobi/mobileService.php
+
     private static final String serverDomain ="https://www.9666.mobi";
 
     public static final String SERVER_URL = serverDomain + "/mobileService.php";

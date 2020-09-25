@@ -350,7 +350,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 //        CowboySetting.CHANNEL = MobileUtils.getChannelName(this);
 //        CowboySetting.CLIENT_VERSION = MobileUtils.getVersion(this);
         CowboySetting.CHANNEL = "cowboy";
-        CowboySetting.CLIENT_VERSION = "3.2.4";
+        CowboySetting.CLIENT_VERSION = "4.9.4";
     }
 
 }
