@@ -1,10 +1,10 @@
 <resources>
 
-    <!-- 排序方式按照英文字母表a-z正序排列 -->
     <string name="app_name">找牛股</string>
     <string name="app_number_default">--</string>
     <string name="yes">是的</string>
     <string name="no">不要</string>
+    <string name="pressAgainExit">再按一次退出</string>
 
     <string name="concern_stock_fail">添加失败</string>
     <string name="concern_stock_success">添加成功</string>

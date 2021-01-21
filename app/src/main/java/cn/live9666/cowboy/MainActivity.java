@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -44,9 +45,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
             FRAGMENT_LIVE, FRAGMENT_TREASURE, FRAGMENT_FIND};
 
     private FragmentManager fragmentManager;
-    private ArrayList<Fragment> fragments = new ArrayList<>();
+    private final ArrayList<Fragment> fragments = new ArrayList<>();
     private ActionBarDrawerToggle toggle;
     private CardView cvTabBar;
+    //记录上次按返回键的时间
+    private long mBackTime = 0;
 
     public CardView getBottomTab() {
 
@@ -61,6 +64,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         fragmentManager = getSupportFragmentManager();
 
         initView();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - mBackTime > 2000) {
+                mBackTime = System.currentTimeMillis();
+                showToast(R.string.pressAgainExit);
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initView() {
@@ -116,18 +133,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
     /**
      * hide fragment
-     * */
+     */
     private void hideFragments(FragmentManager fragmentManager, FragmentTransaction transaction) {
 
-        if(fragmentManager.findFragmentByTag(FRAGMENT_FIND) != null)
+        if (fragmentManager.findFragmentByTag(FRAGMENT_FIND) != null)
             transaction.hide(fragmentManager.findFragmentByTag(FRAGMENT_FIND));
-        if(fragmentManager.findFragmentByTag(FRAGMENT_INDEX) != null)
+        if (fragmentManager.findFragmentByTag(FRAGMENT_INDEX) != null)
             transaction.hide(fragmentManager.findFragmentByTag(FRAGMENT_INDEX));
-        if(fragmentManager.findFragmentByTag(FRAGMENT_LIVE) != null)
+        if (fragmentManager.findFragmentByTag(FRAGMENT_LIVE) != null)
             transaction.hide(fragmentManager.findFragmentByTag(FRAGMENT_LIVE));
-        if(fragmentManager.findFragmentByTag(FRAGMENT_STOCK) != null)
+        if (fragmentManager.findFragmentByTag(FRAGMENT_STOCK) != null)
             transaction.hide(fragmentManager.findFragmentByTag(FRAGMENT_STOCK));
-        if(fragmentManager.findFragmentByTag(FRAGMENT_TREASURE) != null)
+        if (fragmentManager.findFragmentByTag(FRAGMENT_TREASURE) != null)
             transaction.hide(fragmentManager.findFragmentByTag(FRAGMENT_TREASURE));
     }
 
@@ -261,10 +278,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 break;
 
             case R.id.nav_darkMode:
-
                 boolean b = SharedPreferencesUtil.getBoolean(SharedPreferencesUtil.SP_DARK_MODE, false);
-                SharedPreferencesUtil.putBoolean(SharedPreferencesUtil.SP_DARK_MODE,
-                        !b);
+                SharedPreferencesUtil.putBoolean(SharedPreferencesUtil.SP_DARK_MODE, !b);
                 this.recreate();
                 break;
 
@@ -312,22 +327,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case CowboyResponseDocument.PERMISSION_READ_PHONE_STATE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == CowboyResponseDocument.PERMISSION_READ_PHONE_STATE) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    setInfo();
+                // permission was granted, yay! Do the
+                // contacts-related task you need to do.
+                setInfo();
 
-                } else {
+            } else {
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
             }
 
             // other 'case' lines to check for other
