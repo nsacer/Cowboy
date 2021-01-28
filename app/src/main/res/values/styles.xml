@@ -58,7 +58,7 @@
         <item name="overlapAnchor">false</item>
     </style>
 
-    <!--夜间模式 部分属性影响很多空间空间设置-->
+    <!--夜间模式 部分属性影响很多控件设置-->
     <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryDarkTheme</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkDarkTheme</item>

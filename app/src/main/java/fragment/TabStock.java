@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -72,7 +73,7 @@ public class TabStock extends BaseFragment implements Toolbar.OnMenuItemClickLis
     private RvAdapterStock adapter;
     private SimpleItemTouchHelperCallback simpleCallback;
 
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
 
         @Override
         public void handleMessage(Message msg) {
